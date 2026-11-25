@@ -12,16 +12,24 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 .shell{width:min(100%,1050px)}
 .top{display:flex;justify-content:space-between;align-items:center;color:#ead8b7;margin:0 4px 12px;font-size:13px;letter-spacing:2px}
 .top b{font-size:18px;letter-spacing:4px}
-.book{position:relative;width:100%;height:min(76vh,720px);min-height:540px;perspective:1800px}
+.sound-toggle{border:1px solid #b38b52;background:rgba(213,185,141,.14);color:#ead8b7;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:bold;cursor:pointer;letter-spacing:0;transition:background .2s}
+.sound-toggle:hover{background:rgba(213,185,141,.26)}
+.book{position:relative;width:100%;height:min(76vh,720px);min-height:540px;perspective:2100px}
 .page{position:absolute;inset:0;display:none;overflow:hidden;border:1px solid #8d693b;border-radius:4px;background:
  radial-gradient(circle at 20% 15%,rgba(255,255,255,.28),transparent 35%),
  repeating-linear-gradient(8deg,rgba(96,65,31,.035) 0 1px,transparent 1px 5px),
  linear-gradient(120deg,var(--paper2),var(--paper) 58%,#c9a879);
- box-shadow:0 22px 55px #0009,inset 0 0 45px #7c552522;padding:clamp(22px,5vw,58px)}
+ box-shadow:0 22px 55px #0009,inset 0 0 45px #7c552522;padding:clamp(22px,5vw,58px);transform-origin:right center;transform-style:preserve-3d;backface-visibility:hidden}
 .page:not(.active){display:none !important}
-.page.active{display:flex;animation:turn .38s ease}
+.page.active{display:flex;animation:turnIn .48s cubic-bezier(.22,1,.36,1) both}
 .page.active.product{display:grid}
-@keyframes turn{from{opacity:.45;transform:rotateY(-5deg)}to{opacity:1;transform:rotateY(0)}}
+.page.flip-out-next{display:flex !important;z-index:5;pointer-events:none;animation:foldNext .46s cubic-bezier(.32,.72,0,1) forwards}
+.page.flip-out-next.product{display:grid !important}
+.page.flip-out-prev{display:flex !important;z-index:5;pointer-events:none;animation:foldPrev .46s cubic-bezier(.32,.72,0,1) forwards}
+.page.flip-out-prev.product{display:grid !important}
+@keyframes turnIn{from{opacity:.55;transform:rotateY(10deg) scale(.99)}to{opacity:1;transform:rotateY(0) scale(1)}}
+@keyframes foldNext{0%{opacity:1;transform:rotateY(0deg);box-shadow:0 22px 55px #0009}100%{opacity:.15;transform:rotateY(-74deg) scale(.97);box-shadow:-16px 20px 40px #000b}}
+@keyframes foldPrev{0%{opacity:1;transform:rotateY(0deg);box-shadow:0 22px 55px #0009}100%{opacity:.15;transform:rotateY(74deg) scale(.97);box-shadow:16px 20px 40px #000b}}
 .page:after{content:"";position:absolute;inset:12px;border:1px solid #9e794a55;pointer-events:none}
 .cover{align-items:center;justify-content:center;text-align:center;background:
  radial-gradient(ellipse at 50% 45%,#e7d3ad 0,#c8a574 72%,#a67c49 100%)}
@@ -37,6 +45,8 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 .product{display:grid;grid-template-columns:1fr 1fr;gap:clamp(15px,4vw,50px);align-items:center;direction:ltr}
 .visual{height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2}
 .visual img{max-width:100%;max-height:84%;object-fit:contain;border-radius:6px;filter:drop-shadow(0 14px 12px #3b281b33);transition:opacity .25s ease}
+.detail-trigger{position:absolute;top:6px;left:6px;z-index:6;border:1px solid #8d693b;background:rgba(234,216,183,.92);color:#24180f;border-radius:20px;padding:5px 11px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 4px 10px #0003;transition:transform .15s,background .2s}
+.detail-trigger:hover{background:#24180f;color:#ead8b7;transform:translateY(-1px)}
 .view-switch{display:inline-flex;gap:4px;margin-top:12px;padding:4px;border-radius:25px;background:rgba(36,24,15,.12);border:1px solid #9d784888;direction:rtl}
 .view-btn{border:none;background:transparent;color:#24180f;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:bold;cursor:pointer;transition:all .2s}
 .view-btn.active{background:#24180f;color:#ead8b7}
@@ -58,6 +68,19 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 .controls button:disabled{opacity:.35;cursor:default}
 #count{min-width:72px;text-align:center;font-size:13px}
 .hint{color:#c9ad83;text-align:center;font-size:11px;margin-top:9px}
+
+.inspect-modal{position:fixed;inset:0;background:rgba(13,9,6,.88);display:none;align-items:center;justify-content:center;padding:16px;z-index:60}
+.inspect-modal.open{display:flex}
+.inspect-card{width:min(100%,640px);max-height:90vh;background:linear-gradient(125deg,var(--paper2),var(--paper));color:var(--ink);border:1px solid #8d693b;border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px #000c}
+.inspect-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.inspect-head h3{margin:0;font-size:18px;color:#2a1b10}
+.inspect-close{border:1px solid #8d693b;background:#24180f;color:#ead8b7;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:bold;cursor:pointer}
+.inspect-stage{max-height:58vh;overflow:auto;background:rgba(36,24,15,.08);border:1px solid #9d784877;border-radius:6px;padding:12px;text-align:center}
+.inspect-stage img{max-width:100%;max-height:52vh;object-fit:contain;transition:transform .25s ease;transform-origin:center center}
+.inspect-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.inspect-btn{border:1px solid #8d693b;background:transparent;color:#24180f;border-radius:24px;padding:8px 16px;font-size:12px;font-weight:bold;cursor:pointer;text-decoration:none}
+.inspect-btn.primary{background:#24180f;color:#ead8b7}
+
 @media(max-width:650px){
  body{padding:10px}.book{height:78vh;min-height:530px}
  .product{grid-template-columns:1fr;grid-template-rows:55% 45%;gap:0}
@@ -70,7 +93,7 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 </head>
 <body>
 <div class="shell">
- <div class="top"><span>COLLECTION / 2026</span><b>EZWA</b><span>عزوة</span></div>
+ <div class="top"><span>COLLECTION / 2026</span><b>EZWA</b><button type="button" class="sound-toggle" id="soundToggle">🔊 الصوت: مفعّل</button></div>
  <main class="book" aria-label="كتالوج عزوة">
   <section class="page cover active">
    <div><div class="orn">✦</div><div class="brand">EZWA</div><div class="sub">CULTURE · IDENTITY · STYLE</div><div class="rule"></div><div class="arabic">عزوة — كتالوج التصاميم</div><p class="small">مختارات من الهوية والثقافة والفن</p></div>
@@ -129,15 +152,108 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
  </div>
  <div class="hint">استخدم الأسهم أو السحب للتنقل بين صفحات الكتالوج</div>
 </div>
+
+<div class="inspect-modal" id="inspectModal" role="dialog" aria-modal="true" aria-labelledby="inspectTitle">
+ <div class="inspect-card" onclick="event.stopPropagation()">
+  <div class="inspect-head">
+   <h3 id="inspectTitle">معاينة التصميم</h3>
+   <button type="button" class="inspect-close" id="inspectClose">إغلاق ✕</button>
+  </div>
+  <div class="inspect-stage">
+   <img id="inspectImg" src="" alt="معاينة مكبرة للتصميم">
+  </div>
+  <div class="inspect-foot">
+   <button type="button" class="inspect-btn" id="inspectZoomBtn">تكبير التفاصيل</button>
+   <a class="inspect-btn primary" id="inspectSimLink" target="_blank" rel="noopener">معاينة في الاستوديو ↗</a>
+  </div>
+ </div>
+</div>
+
 <script>
 const WA_PHONE="966502777884";
 const SIM_URL="https://yusefna30-lgtm.github.io/3d-print-simulator/";
+
+let soundEnabled=true;
+let audioCtx=null;
+const soundBtn=document.getElementById('soundToggle');
+soundBtn.addEventListener('click',()=>{
+ soundEnabled=!soundEnabled;
+ soundBtn.textContent=soundEnabled?'🔊 الصوت: مفعّل':'🔇 الصوت: مكتوم';
+});
+
+function playFlipSound(){
+ if(!soundEnabled)return;
+ try{
+  if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  const len=Math.floor(audioCtx.sampleRate*0.13);
+  const buf=audioCtx.createBuffer(1,len,audioCtx.sampleRate);
+  const ch=buf.getChannelData(0);
+  for(let i=0;i<len;i++){
+   const env=Math.sin((i/len)*Math.PI);
+   ch[i]=(Math.random()*2-1)*env*0.22;
+  }
+  const src=audioCtx.createBufferSource();
+  src.buffer=buf;
+  const filter=audioCtx.createBiquadFilter();
+  filter.type='bandpass';
+  filter.frequency.setValueAtTime(1350,audioCtx.currentTime);
+  filter.Q.setValueAtTime(0.85,audioCtx.currentTime);
+  src.connect(filter);
+  filter.connect(audioCtx.destination);
+  src.start();
+ }catch(e){}
+}
+
+const inspectModal=document.getElementById('inspectModal');
+const inspectTitle=document.getElementById('inspectTitle');
+const inspectImg=document.getElementById('inspectImg');
+const inspectZoomBtn=document.getElementById('inspectZoomBtn');
+const inspectSimLink=document.getElementById('inspectSimLink');
+let inspectZoomed=false;
+
+function openInspect(title,currentSrc,simHref){
+ inspectZoomed=false;
+ inspectTitle.textContent=title;
+ inspectImg.src=currentSrc;
+ inspectImg.style.transform='scale(1)';
+ inspectZoomBtn.textContent='تكبير التفاصيل';
+ inspectSimLink.href=simHref;
+ inspectModal.classList.add('open');
+}
+
+function closeInspect(){
+ inspectModal.classList.remove('open');
+}
+
+inspectZoomBtn.addEventListener('click',()=>{
+ inspectZoomed=!inspectZoomed;
+ inspectImg.style.transform=inspectZoomed?'scale(1.7)':'scale(1)';
+ inspectZoomBtn.textContent=inspectZoomed?'تصغير التفاصيل':'تكبير التفاصيل';
+});
+document.getElementById('inspectClose').addEventListener('click',closeInspect);
+inspectModal.addEventListener('click',closeInspect);
 
 document.querySelectorAll('.page.product').forEach(sec=>{
  const visual=sec.querySelector('.visual');
  const img=visual.querySelector('img');
  const artSrc=img.getAttribute('data-art')||img.src;
  const modelSrc=img.getAttribute('data-model');
+ const info=sec.querySelector('.info');
+ const title=(info.querySelector('h2')||{}).textContent||'تصميم عزوة';
+ const code=(info.querySelector('.num')||{}).textContent||'';
+ const fullImgUrl=new URL(artSrc,window.location.href).href;
+ const simHref=SIM_URL+'?design='+encodeURIComponent(fullImgUrl);
+
+ const detailBtn=document.createElement('button');
+ detailBtn.type='button';
+ detailBtn.className='detail-trigger';
+ detailBtn.textContent='🔍 تفاصيل';
+ detailBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  openInspect(title+(code?' — '+code:''),img.currentSrc||img.src,simHref);
+ });
+ visual.appendChild(detailBtn);
 
  if(modelSrc){
   const sw=document.createElement('div');
@@ -157,11 +273,7 @@ document.querySelectorAll('.page.product').forEach(sec=>{
   visual.appendChild(sw);
  }
 
- const info=sec.querySelector('.info');
- const title=(info.querySelector('h2')||{}).textContent||'تصميم عزوة';
- const code=(info.querySelector('.num')||{}).textContent||'';
  const msg=encodeURIComponent('السلام عليكم، أرغب بطلب تصميم "'+title+'" ('+code+') من كتالوج عزوة.');
- const fullImgUrl=new URL(artSrc,window.location.href).href;
 
  const actions=document.createElement('div');
  actions.className='actions';
@@ -172,8 +284,8 @@ document.querySelectorAll('.page.product').forEach(sec=>{
  wa.textContent='اطلب عبر واتساب ↗';
 
  const sim=document.createElement('a');
- sim.className='sim-btn';sim.target='_blank';sim.rel='noopener';
- sim.href=SIM_URL+'?design='+encodeURIComponent(fullImgUrl);
+ sim.className='sim-btn';sim.target='_blank';wa.rel='noopener';
+ sim.href=simHref;
  sim.textContent='معاينة في الاستوديو ↗';
 
  actions.appendChild(wa);
@@ -184,10 +296,40 @@ document.querySelectorAll('.page.product').forEach(sec=>{
 const pages=[...document.querySelectorAll('.page')];
 const prev=document.getElementById('prev'),next=document.getElementById('next'),count=document.getElementById('count');
 let current=0;
-function show(n){current=Math.max(0,Math.min(pages.length-1,n));pages.forEach((p,i)=>p.classList.toggle('active',i===current));prev.disabled=current===0;next.disabled=current===pages.length-1;count.textContent=(current+1)+' / '+pages.length;}
-prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
-document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(current+1);if(e.key==='ArrowRight')show(current-1);});
-let startX=0;document.querySelector('.book').addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX},{passive:true});
+let isAnimating=false;
+
+function show(n){
+ const target=Math.max(0,Math.min(pages.length-1,n));
+ if(target===current||isAnimating)return;
+ isAnimating=true;
+ const dirClass=target>current?'flip-out-next':'flip-out-prev';
+ const prevPageEl=pages[current];
+ playFlipSound();
+ prevPageEl.classList.add(dirClass);
+
+ setTimeout(()=>{
+  prevPageEl.classList.remove('active',dirClass);
+  current=target;
+  pages.forEach((p,i)=>p.classList.toggle('active',i===current));
+  prev.disabled=current===0;
+  next.disabled=current===pages.length-1;
+  count.textContent=(current+1)+' / '+pages.length;
+  isAnimating=false;
+ },240);
+}
+
+prev.addEventListener('click',()=>show(current-1));
+next.addEventListener('click',()=>show(current+1));
+document.addEventListener('keydown',e=>{
+ if(inspectModal.classList.contains('open')){
+  if(e.key==='Escape')closeInspect();
+  return;
+ }
+ if(e.key==='ArrowLeft')show(current+1);
+ if(e.key==='ArrowRight')show(current+1);
+});
+let startX=0;
+document.querySelector('.book').addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX},{passive:true});
 document.querySelector('.book').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-startX;if(Math.abs(dx)>45)show(current+(dx<0?1:-1));},{passive:true});
 </script>
 </body>
