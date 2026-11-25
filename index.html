@@ -161,6 +161,7 @@ document.querySelectorAll('.page.product').forEach(sec=>{
  const title=(info.querySelector('h2')||{}).textContent||'تصميم عزوة';
  const code=(info.querySelector('.num')||{}).textContent||'';
  const msg=encodeURIComponent('السلام عليكم، أرغب بطلب تصميم "'+title+'" ('+code+') من كتالوج عزوة.');
+ const fullImgUrl=new URL(artSrc,window.location.href).href;
 
  const actions=document.createElement('div');
  actions.className='actions';
@@ -172,7 +173,7 @@ document.querySelectorAll('.page.product').forEach(sec=>{
 
  const sim=document.createElement('a');
  sim.className='sim-btn';sim.target='_blank';sim.rel='noopener';
- sim.href=SIM_URL;
+ sim.href=SIM_URL+'?design='+encodeURIComponent(fullImgUrl);
  sim.textContent='معاينة في الاستوديو ↗';
 
  actions.appendChild(wa);
