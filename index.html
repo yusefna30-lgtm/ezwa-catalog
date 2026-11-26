@@ -20,7 +20,7 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
  radial-gradient(circle at 20% 15%,rgba(255,255,255,.28),transparent 35%),
  repeating-linear-gradient(8deg,rgba(96,65,31,.035) 0 1px,transparent 1px 5px),
  linear-gradient(120deg,var(--paper2),var(--paper) 58%,#c9a879);
- box-shadow:0 22px 55px #0009,inset 0 0 45px #7c552522;padding:clamp(20px,4vw,48px);transform-origin:right center;backface-visibility:hidden}
+ box-shadow:0 22px 55px #0009,inset 0 0 45px #7c552522;padding:clamp(18px,3.5vw,44px);transform-origin:right center;backface-visibility:hidden}
 .page:not(.active){display:none !important}
 .page.active{display:flex;animation:turnIn .42s cubic-bezier(.22,1,.36,1) both}
 .page.active.product{display:grid}
@@ -45,28 +45,30 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 .intro h1,.closing h1{font-size:clamp(28px,5vw,48px);margin:0 0 20px}
 .intro p{font-size:clamp(16px,2.2vw,21px);color:#60472c}
 
-.product{display:grid;grid-template-columns:1.15fr 0.85fr;gap:clamp(16px,4vw,46px);align-items:center;direction:ltr}
+.product{display:grid;grid-template-columns:1.35fr 0.65fr;gap:clamp(14px,3vw,36px);align-items:center;direction:ltr}
 .visual{height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2}
-.visual img{max-width:100%;max-height:86%;object-fit:contain;border-radius:6px;filter:drop-shadow(0 14px 12px #3b281b33);transition:opacity .22s ease}
+.visual img{max-width:100%;max-height:88%;object-fit:contain;border-radius:6px;filter:drop-shadow(0 14px 12px #3b281b33);transition:opacity .22s ease}
 
 .detail-trigger{position:absolute;top:6px;left:6px;z-index:6;border:1px solid #8d693b;background:rgba(234,216,183,.94);color:#24180f;border-radius:20px;padding:5px 11px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 4px 10px #0003;transition:transform .15s,background .2s}
 .detail-trigger:hover{background:#24180f;color:#ead8b7;transform:translateY(-1px)}
 
-.view-switch{display:inline-flex;gap:4px;margin-top:10px;padding:3px;border-radius:25px;background:rgba(36,24,15,.12);border:1px solid #9d784888;direction:rtl}
+.view-switch{display:inline-flex;gap:4px;margin-top:8px;padding:3px;border-radius:25px;background:rgba(36,24,15,.12);border:1px solid #9d784888;direction:rtl}
 .view-btn{border:none;background:transparent;color:#24180f;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;cursor:pointer;transition:all .2s}
 .view-btn.active{background:#24180f;color:#ead8b7}
 
 .info{direction:rtl;text-align:right;align-self:center;z-index:1}
-.num{font-size:11px;letter-spacing:3px;color:#8a6638}
-.info h2{font-size:clamp(22px,3.4vw,38px);margin:10px 0;color:#2a1b10}
-.info p{font-size:clamp(13px,1.6vw,17px);line-height:1.9;color:#654a2c}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.wa-btn,.sim-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:30px;text-decoration:none;font-size:12px;font-weight:bold;border:1px solid #8d693b;transition:transform .2s,background .2s}
+.num{font-size:10.5px;letter-spacing:2.5px;color:#8a6638}
+.info h2{font-size:clamp(20px,2.8vw,32px);margin:6px 0 6px;color:#2a1b10}
+.info p{font-size:clamp(12px,1.4vw,15px);line-height:1.7;color:#654a2c;margin:0}
+.mini-specs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(157,120,72,.45);font-size:11px;color:#4a331b}
+.mini-specs span b{color:#24180f}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.wa-btn,.sim-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;text-decoration:none;font-size:11.5px;font-weight:bold;border:1px solid #8d693b;transition:transform .2s,background .2s}
 .wa-btn{background:#24180f;color:#ead8b7}
 .wa-btn:hover{background:#3a2718;transform:translateY(-2px)}
 .sim-btn{background:transparent;color:#24180f}
 .sim-btn:hover{background:rgba(36,24,15,.08);transform:translateY(-2px)}
-.tag{display:inline-block;border-top:1px solid #9d7848;border-bottom:1px solid #9d7848;padding:6px 0;margin-top:12px;font-size:10px;letter-spacing:2px;color:#76562f}
+.tag{display:inline-block;border-top:1px solid #9d7848;border-bottom:1px solid #9d7848;padding:5px 0;margin-top:10px;font-size:9.5px;letter-spacing:1.8px;color:#76562f}
 
 .closing{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .closing .brand{font-size:clamp(42px,9vw,82px)}
@@ -91,20 +93,21 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
 @media(max-width:650px){
  body{padding:8px}
  .book{height:80vh;min-height:540px}
- .product{grid-template-columns:1fr;grid-template-rows:62% 38%;gap:2px}
+ .product{grid-template-columns:1fr;grid-template-rows:66% 34%;gap:2px}
  .visual{min-height:0;grid-row:1}
- .visual img{max-height:84%;width:92%}
- .view-switch{margin-top:6px;padding:2px}
+ .visual img{max-height:85%;width:94%}
+ .view-switch{margin-top:5px;padding:2px}
  .view-btn{padding:4px 10px;font-size:10.5px}
  .detail-trigger{top:4px;left:4px;padding:4px 9px;font-size:10px}
  .info{grid-row:2;align-self:start;padding:0 4px}
- .num{font-size:9.5px;letter-spacing:2px}
- .info h2{margin:2px 0 3px;font-size:17.5px}
- .info p{margin:0;line-height:1.42;font-size:11.5px}
- .tag{margin-top:6px;padding:4px 0;font-size:9px;letter-spacing:1.2px}
- .actions{margin-top:7px;gap:6px}
- .wa-btn,.sim-btn{padding:6px 11px;font-size:11px}
- .page{padding:14px 14px 12px}
+ .num{font-size:9px;letter-spacing:2px}
+ .info h2{margin:2px 0;font-size:16.5px}
+ .info p{margin:0;line-height:1.38;font-size:11px}
+ .mini-specs{margin-top:5px;padding-top:4px;gap:8px;font-size:10px}
+ .tag{margin-top:5px;padding:3px 0;font-size:8.5px;letter-spacing:1.2px}
+ .actions{margin-top:6px;gap:6px}
+ .wa-btn,.sim-btn{padding:6px 10px;font-size:10.5px}
+ .page{padding:13px 13px 11px}
  .page:after{inset:6px}
 }
 </style>
@@ -121,7 +124,7 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
   </section>
 
   <!-- 01: قطار الرياض -->
-  <section class="page product">
+  <section class="page product" data-color="ذهبي وأسود" data-sizes="S - XXL">
    <div class="visual">
     <img decoding="async" src="riyadh-metro.png" data-art="riyadh-metro.png" data-model="model-riyadh-metro.jpg" alt="تصميم قطار الرياض">
    </div>
@@ -134,7 +137,7 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
   </section>
 
   <!-- 02: ملامح من التراث -->
-  <section class="page product">
+  <section class="page product" data-color="ذهبي معتّق" data-sizes="S - XXL">
    <div class="visual">
     <img decoding="async" src="heritage.jpg" data-art="heritage.jpg" data-model="model-heritage.jpg" alt="تصميم الشخصية الهندسية">
    </div>
@@ -147,7 +150,7 @@ body{margin:0;background:radial-gradient(ellipse at center,#49301d 0,#1d1712 78%
   </section>
 
   <!-- 03: روح المنتخب -->
-  <section class="page product">
+  <section class="page product" data-color="ذهبي" data-sizes="S - XXL">
    <div class="visual">
     <img decoding="async" src="eagle-design.webp" data-art="eagle-design.webp" data-model="model-eagle.jpg" alt="تصميم روح المنتخب">
    </div>
@@ -260,6 +263,8 @@ document.querySelectorAll('.page.product').forEach(sec=>{
  const info=sec.querySelector('.info');
  const title=(info.querySelector('h2')||{}).textContent||'تصميم عزوة';
  const code=(info.querySelector('.num')||{}).textContent||'';
+ const color=sec.getAttribute('data-color')||'';
+ const sizes=sec.getAttribute('data-sizes')||'';
  const fullImgUrl=new URL(artSrc,window.location.href).href;
  const simHref=SIM_URL+'?design='+encodeURIComponent(fullImgUrl);
 
@@ -289,6 +294,16 @@ document.querySelectorAll('.page.product').forEach(sec=>{
    },140);
   });
   visual.appendChild(sw);
+ }
+
+ if(color||sizes){
+  const specs=document.createElement('div');
+  specs.className='mini-specs';
+  if(color)specs.innerHTML+=`<span><b>اللون:</b> ${color}</span>`;
+  if(sizes)specs.innerHTML+=`<span><b>المقاسات:</b> ${sizes}</span>`;
+  const tagEl=info.querySelector('.tag');
+  if(tagEl)info.insertBefore(specs,tagEl);
+  else info.appendChild(specs);
  }
 
  const msg=encodeURIComponent('السلام عليكم، أرغب بطلب تصميم "'+title+'" ('+code+') من كتالوج عزوة.');
@@ -344,7 +359,7 @@ document.addEventListener('keydown',e=>{
   return;
  }
  if(e.key==='ArrowLeft')show(current+1);
- if(e.key==='ArrowRight')show(current-1);
+ if(e.key==='ArrowRight')show(current+1);
 });
 let startX=0;document.querySelector('.book').addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX},{passive:true});
 document.querySelector('.book').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-startX;if(Math.abs(dx)>45)show(current+(dx<0?1:-1));},{passive:true});
